@@ -4,6 +4,10 @@ import re
 from dataclasses import dataclass
 from datetime import datetime, time
 import math
+from loguru import logger
+from ratelimit import limits
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 BASE_URL = "https://2f0f8fc-az-westeurope-fsly.cdn.redbee.live/ukparliament/parliamentlive"
@@ -77,6 +81,14 @@ def get_clip_bounds(stream_start: datetime, clip_start: str, clip_end: str, segm
     return start_segment, end_segment
 
 
+def make_request(url: str, session: requests.Session):
+    response = session.get(url=url, stream=True)
+    logger.debug(f"status code: {response.status_code}")
+    response.raise_for_status()
+
+    return response
+
+
 def main():
     asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
     material_id = "IAz5cD8Tg7_0D62A9b"
@@ -94,8 +106,17 @@ def main():
     files = [f"vod-idx-video=300000-{segment}.ts" for segment in range(start_segment, end_segment+1)]
     urls = [f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{file}" for file in files]
 
-    pprint(urls)
+    retry_logic = Retry(
+        total=3,
+        status_forcelist=[429, 500],
+        backoff_factor=1,
+        respect_retry_after_header=True,
+    )
+    with requests.Session() as session:
+        session.mount("https://", HTTPAdapter(max_retries=retry_logic))
+        responses = [make_request(url, session) for url in urls]
 
+    [pprint(response.content) for response in responses]
 
 
 if __name__ == "__main__":
