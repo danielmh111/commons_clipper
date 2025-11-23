@@ -1,18 +1,34 @@
 import requests
 from rich.pretty import pprint
 import re
+from dataclasses import dataclass
 
-URL = "https://2f0f8fc-az-westeurope-fsly.cdn.redbee.live/ukparliament/parliamentlive/assets/03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b/materials/IAz5cD8Tg7_0D62A9b/vod-idx.ism/.m3u8"
+BASE_URL = "https://2f0f8fc-az-westeurope-fsly.cdn.redbee.live/ukparliament/parliamentlive"
+
+@dataclass
+class ManifestExtensions:
+    Master: str = ".msu8"
+    Video180p: str = "vod-idx-video=300000.m3u8"
+    Video360p: str = "vod-idx-video=850000.m3u8"
+    Video576p: str = "vod-idx-video=1300000.m3u8"
+    Video1080p: str = "vod-idx-video=3000000.m3u8"
+    Audio: str = "vod-idx-audio_eng=64000.m3u8"
+
+
 
 def main():
-    response = requests.get(URL)
+    asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
+    material_id = "IAz5cD8Tg7_0D62A9b"
+    manifest = ManifestExtensions.Video180p
+
+    url = f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{manifest}"
+    pprint(url)
+
+    response = requests.get(url)
     pprint(response.status_code)
-    pprint(response.text)
-
+    
     text = response.text
-    lines = [line for line in text.split("\n") if re.match(".*(vod-idx-((video)|(audio)|(audio_eng))+=[0-9]{5,7}.m3u8)", line)]
-
-    pprint(lines)
+    pprint(text)
 
 
 if __name__ == "__main__":
