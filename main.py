@@ -18,18 +18,19 @@ class ManifestExtensions:
 
 def fetch_manifest(asset_id: str, material_id: str, resolution: str) -> str:
 
-    if resolution == "180p":
-        manifest = ManifestExtensions.Video180p
-    elif resolution == "360p":
-        manifest = ManifestExtensions.Video360p
-    elif resolution == "576p":
-        manifest = ManifestExtensions.Video576p
-    elif resolution == "1080p":
-        manifest = ManifestExtensions.Video1080p
-    else:
-        raise ValueError(
-            f"specified resolution: {resolution} is not valid. Valid formats are: '180p', '360p', '576p', '1080p'"
-            )
+    match resolution:
+        case "180p":
+            manifest = ManifestExtensions.Video180p
+        case "360p":
+            manifest = ManifestExtensions.Video360p
+        case "576p":
+            manifest = ManifestExtensions.Video576p
+        case "1080p":
+            manifest = ManifestExtensions.Video1080p
+        case _:
+            raise ValueError(
+                f"specified resolution {resolution} is not valid. Valid formats are: '180p', '360p', '576p', '1080p'"
+                )
 
     url = f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{manifest}"
 
@@ -37,6 +38,9 @@ def fetch_manifest(asset_id: str, material_id: str, resolution: str) -> str:
     response.raise_for_status()
 
     return response.text
+
+
+# gideon speaks at 14:53:14
 
 
 def main():
@@ -51,6 +55,9 @@ def main():
 
     duration_target = int([line.split(":") for line in lines if re.match(".*TARGETDURATION.*",line)][0][1])
     print(duration_target)
+
+    actual_durations = [line for line in lines if re.match("#EXINF:")]
+    print(actual_durations)
 
     start_time = datetime.fromisoformat([line.split(":")  for line in lines if re.match(".*PROGRAM-DATE-TIME.*", line)][0][1])
     print(start_time)
