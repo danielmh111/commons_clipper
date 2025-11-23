@@ -42,14 +42,7 @@ def fetch_manifest(asset_id: str, material_id: str, resolution: str) -> str:
     return response.text
 
 
-# gideon speaks at 14:53:14
-
-def main():
-    asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
-    material_id = "IAz5cD8Tg7_0D62A9b"
-    resolution = "180p"
-
-    manifest = fetch_manifest(asset_id=asset_id, material_id=material_id, resolution=resolution)
+def parse_manifest_info(manifest: str) -> tuple[datetime, float]:
     lines: list[str] = [line for line in manifest.split("\n")]
 
     duration_target = int([line.split(":") for line in lines if re.match(".*TARGETDURATION.*",line)][0][1])
@@ -58,24 +51,51 @@ def main():
     start_time = datetime.fromisoformat([line.split(":")  for line in lines if re.match(".*PROGRAM-DATE-TIME.*", line)][0][1])
     segments_independant = bool([line for line in lines if re.match(".*INDEPENDENT.*", line)])
 
-    stream_start: time = start_time.time()
-    date = start_time.date()
-    clip_start = time.fromisoformat("14:53:14")
-    clip_start_dt = datetime(date.year, date.month, date.day, clip_start.hour, clip_start.minute, clip_start.second)
-    start_offset = clip_start_dt - start_time
-    print(start_offset)
+    if not (segments_independant and unique_durations == 1):
+        raise Exception("segments must be independant and the same duration for this logic to work")
 
-    if segments_independant and unique_durations == 1:
-        start_segment = int(start_offset.seconds // actual_durations[0])
-        print(start_segment)    
+    duration = actual_durations[0] if unique_durations else float(duration_target)
 
-    clip_end = time.fromisoformat("14:54:27")
-    clip_end_dt = datetime(date.year, date.month, date.day, clip_end.hour, clip_end.minute, clip_end.second)
-    end_offset = clip_end_dt - start_time
+    return start_time, duration
 
-    if segments_independant and unique_durations == 1:
-        end_segment = math.ceil(end_offset.seconds/actual_durations[0])
-        print(end_segment)
+
+def get_clip_bounds(stream_start: datetime, clip_start: str, clip_end: str, segment_duration: float) -> tuple[int, int]:
+
+    date = stream_start.date()
+    clip_start_time = time.fromisoformat(clip_start)
+    clip_start_dt = datetime(date.year, date.month, date.day, clip_start_time.hour, clip_start_time.minute, clip_start_time.second)
+    start_offset = clip_start_dt - stream_start
+
+    start_segment = int(start_offset.seconds // segment_duration)
+
+    clip_end_time = time.fromisoformat(clip_end)
+    clip_end_dt = datetime(date.year, date.month, date.day, clip_end_time.hour, clip_end_time.minute, clip_end_time.second)
+    end_offset = clip_end_dt - stream_start
+
+    end_segment = math.ceil(end_offset.seconds/segment_duration)
+
+    return start_segment, end_segment
+
+
+def main():
+    asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
+    material_id = "IAz5cD8Tg7_0D62A9b"
+    resolution = "180p"
+
+    manifest = fetch_manifest(asset_id=asset_id, material_id=material_id, resolution=resolution)
+    start_time, segment_duration = parse_manifest_info(manifest=manifest)
+
+    # gideon speaks at 14:53:14
+    start = "14:53:14" # this is the format that will be found in the agenda/index
+    end = "14:54:27"
+
+    start_segment, end_segment = get_clip_bounds(start_time, start, end, segment_duration)
+
+    files = [f"vod-idx-video=300000-{segment}.ts" for segment in range(start_segment, end_segment+1)]
+    urls = [f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{file}" for file in files]
+
+    pprint(urls)
+
 
 
 if __name__ == "__main__":
