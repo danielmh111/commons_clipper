@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from datetime import datetime, time
 from io import BytesIO
 from pathlib import Path
+from uuid import uuid4
 
 import ffmpeg
 import requests
@@ -158,7 +159,7 @@ def main():
     ]
 
     audio_files = [
-        f"vod-idx-audio_eng=300000-{segment}.ts"
+        f"vod-idx-audio_eng=64000-{segment}.ts"
         for segment in range(start_segment, end_segment + 1)
     ]
     audio_urls = [
@@ -199,14 +200,14 @@ def main():
         video_path = video_temp.name
         audio_path = audio_temp.name
 
-    output_path = CLIPS / "clip.mp4"
+    output_path = CLIPS / f"clip{uuid4()}.mp4"
 
     # ffmepg -f mpegts -i video_pipe -i audio_pipe -c:v copy -c:a copy -map 0:v:0 -map 1:a:0 output.mp4
     # i hate using ffmpeg
 
     subprocess.run(
         [
-            "ffmepg",
+            "ffmpeg",
             "-f",
             "mpegts",
             "-i",
