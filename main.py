@@ -9,10 +9,10 @@ from io import BytesIO
 from pathlib import Path
 from uuid import uuid4
 
-import ffmpeg
 import requests
 from loguru import logger
 from project_paths import paths
+from requests import Response
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -23,31 +23,33 @@ BASE_URL = (
 
 
 @dataclass
-class ManifestExtensions:
-    Master: str = ".m3u8"
-    Video180p: str = "vod-idx-video=300000.m3u8"
-    Video360p: str = "vod-idx-video=850000.m3u8"
-    Video576p: str = "vod-idx-video=1300000.m3u8"
-    Video1080p: str = "vod-idx-video=3000000.m3u8"
-    Audio: str = "vod-idx-audio_eng=64000.m3u8"
+class StreamQuality:
+    resolution: str
+    video_stem: str
+    audio_stem: str = "vod-idx-audio_eng=64000"
 
 
-def fetch_manifest(asset_id: str, material_id: str, resolution: str) -> str:
-    match resolution:
-        case "180p":
-            manifest = ManifestExtensions.Video180p
-        case "360p":
-            manifest = ManifestExtensions.Video360p
-        case "576p":
-            manifest = ManifestExtensions.Video576p
-        case "1080p":
-            manifest = ManifestExtensions.Video1080p
-        case _:
-            raise ValueError(
-                f"specified resolution {resolution} is not valid. Valid formats are: '180p', '360p', '576p', '1080p'"
-            )
+BITRATE_STEMS = {
+    "180p": "vod-idx-video=300000",
+    "360p": "vod-idx-video=850000",
+    "576p": "vod-idx-video=1300000",
+    "1080p": "vod-idx-video=3000000",
+}
 
-    url = f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{manifest}"
+
+def get_stream_quality(resolution: str):
+    if resolution not in BITRATE_STEMS.keys():
+        raise ValueError(
+            f"specified resolution {resolution} is not valid. Valid formats are: '180p', '360p', '576p', '1080p'"
+        )
+
+    return StreamQuality(resolution, BITRATE_STEMS[resolution])
+
+
+def fetch_manifest(asset_id: str, material_id: str, stem: str) -> str:
+    url = (
+        f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{stem}.m3u8"
+    )
 
     response = requests.get(url)
     response.raise_for_status()
@@ -131,26 +133,15 @@ def make_request(url: str, session: requests.Session):
     return response
 
 
-def main():
-    asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
-    material_id = "IAz5cD8Tg7_0D62A9b"
-    resolution = "180p"
-
-    manifest = fetch_manifest(
-        asset_id=asset_id, material_id=material_id, resolution=resolution
-    )
-    start_time, segment_duration = parse_manifest_info(manifest=manifest)
-
-    # gideon speaks at 14:53:14
-    start = "14:53:14"  # this is the format that will be found in the agenda/index
-    end = "14:54:27"
-
-    start_segment, end_segment = get_clip_bounds(
-        start_time, start, end, segment_duration
-    )
-
+def get_urls(
+    start_segment: int,
+    end_segment: int,
+    stream_quality: StreamQuality,
+    asset_id: str,
+    material_id: str,
+) -> tuple[list[str], list[str]]:
     video_files = [
-        f"vod-idx-video=300000-{segment}.ts"
+        f"{stream_quality.video_stem}-{segment}.ts"
         for segment in range(start_segment, end_segment + 1)
     ]
     video_urls = [
@@ -159,7 +150,7 @@ def main():
     ]
 
     audio_files = [
-        f"vod-idx-audio_eng=64000-{segment}.ts"
+        f"{stream_quality.audio_stem}-{segment}.ts"
         for segment in range(start_segment, end_segment + 1)
     ]
     audio_urls = [
@@ -167,6 +158,12 @@ def main():
         for file in audio_files
     ]
 
+    return video_urls, audio_urls
+
+
+def request_stream_data(
+    video_urls: list[str], audio_urls: list[str]
+) -> tuple[bytes, bytes]:
     retry_logic = Retry(
         total=3,
         status_forcelist=[429, 500],
@@ -178,19 +175,13 @@ def main():
         video_responses = [make_request(url, session) for url in video_urls]
         audio_responses = [make_request(url, session) for url in audio_urls]
 
-    # frames = BytesIO()
-    # for response in video_responses:
-    #     frames.write(response.content)
-    # frames.seek(0)
-
-    # audio = BytesIO()
-    # for response in audio_responses:
-    #     frames.write(response.content)
-    # audio.seek(0)
-
     video_data = b"".join(response.content for response in video_responses)
     audio_data = b"".join(response.content for response in audio_responses)
 
+    return video_data, audio_data
+
+
+def create_clip_from_stream_data(video_data: bytes, audio_data: bytes) -> None:
     with (
         tempfile.NamedTemporaryFile(suffix=".ts", delete=False) as video_temp,
         tempfile.NamedTemporaryFile(suffix=".ts", delete=False) as audio_temp,
@@ -225,6 +216,40 @@ def main():
             str(output_path.absolute()),
         ]
     )
+
+
+def main():
+    asset_id = "03d096f3-4a94-4352-b351-70ad3bcb39cc_0D62A9b"
+    material_id = "IAz5cD8Tg7_0D62A9b"
+    resolution = "180p"
+    stream_quality = get_stream_quality(resolution)
+
+    manifest = fetch_manifest(
+        asset_id=asset_id,
+        material_id=material_id,
+        stem=stream_quality.video_stem,
+    )
+    start_time, segment_duration = parse_manifest_info(manifest=manifest)
+
+    # gideon speaks at 14:53:14
+    start = "14:53:14"  # this is the format that will be found in the agenda/index
+    end = "14:54:27"
+
+    start_segment, end_segment = get_clip_bounds(
+        start_time, start, end, segment_duration
+    )
+
+    video_urls, audio_urls = get_urls(
+        start_segment=start_segment,
+        end_segment=end_segment,
+        stream_quality=stream_quality,
+        asset_id=asset_id,
+        material_id=material_id,
+    )
+
+    video_responses, audio_responses = request_stream_data(video_urls, audio_urls)
+
+    create_clip_from_stream_data(video_responses, audio_responses)
 
 
 if __name__ == "__main__":
