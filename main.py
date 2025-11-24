@@ -1,20 +1,19 @@
 import math
 import re
+import subprocess
 from dataclasses import dataclass
 from datetime import datetime, time
-from io import BytesIO, FileIO, StringIO
+from io import BytesIO
 from pathlib import Path
 
 import ffmpeg
 import requests
 from loguru import logger
 from project_paths import paths
-from ratelimit import limits
 from requests.adapters import HTTPAdapter
-from rich.pretty import pprint
 from urllib3.util.retry import Retry
 
-CLIPS = paths.clips
+CLIPS: Path = paths.clips
 BASE_URL = (
     "https://2f0f8fc-az-westeurope-fsly.cdn.redbee.live/ukparliament/parliamentlive"
 )
@@ -22,7 +21,7 @@ BASE_URL = (
 
 @dataclass
 class ManifestExtensions:
-    Master: str = ".msu8"
+    Master: str = ".m3u8"
     Video180p: str = "vod-idx-video=300000.m3u8"
     Video360p: str = "vod-idx-video=850000.m3u8"
     Video576p: str = "vod-idx-video=1300000.m3u8"
@@ -147,13 +146,22 @@ def main():
         start_time, start, end, segment_duration
     )
 
-    files = [
+    video_files = [
         f"vod-idx-video=300000-{segment}.ts"
         for segment in range(start_segment, end_segment + 1)
     ]
-    urls = [
+    video_urls = [
         f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{file}"
-        for file in files
+        for file in video_files
+    ]
+
+    audio_files = [
+        f"vod-idx-audio_eng=300000-{segment}.ts"
+        for segment in range(start_segment, end_segment + 1)
+    ]
+    audio_urls = [
+        f"{BASE_URL}/assets/{asset_id}/materials/{material_id}/vod-idx.ism/{file}"
+        for file in audio_files
     ]
 
     retry_logic = Retry(
@@ -164,14 +172,44 @@ def main():
     )
     with requests.Session() as session:
         session.mount("https://", HTTPAdapter(max_retries=retry_logic))
-        responses = [make_request(url, session) for url in urls]
+        video_responses = [make_request(url, session) for url in video_urls]
+        audio_responses = [make_request(url, session) for url in audio_urls]
 
     frames = BytesIO()
-    for response in responses:
+    for response in video_responses:
         frames.write(response.content)
     frames.seek(0)
 
+    audio = BytesIO()
+    for response in audio_responses:
+        frames.write(response.content)
+    audio.seek(0)
+
     output_path = CLIPS / "clip.mp4"
+
+    # ffmepg -f mpegts -i video_pipe -i audio_pipe -c:v copy -c:a copy -map 0:v:0 -map 1:a:0 output.mp4
+    # i hate using ffmpeg
+
+    subprocess.run(
+        [
+            "ffmepg",
+            "-f",
+            "mpegts",
+            "-i",
+            "video_pipe",
+            "-i",
+            "audio_pipe",
+            "-c:v",
+            "copy",
+            "-c:a",
+            "copy",
+            "-map",
+            "0:v:0",
+            "-map",
+            "1:a:0",
+            "output.mp4",
+        ]
+    )
 
     (
         ffmpeg.input("pipe:0", format="mpegts")
