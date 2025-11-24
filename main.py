@@ -1,6 +1,8 @@
 import math
+import os
 import re
 import subprocess
+import tempfile
 from dataclasses import dataclass
 from datetime import datetime, time
 from io import BytesIO
@@ -175,15 +177,27 @@ def main():
         video_responses = [make_request(url, session) for url in video_urls]
         audio_responses = [make_request(url, session) for url in audio_urls]
 
-    frames = BytesIO()
-    for response in video_responses:
-        frames.write(response.content)
-    frames.seek(0)
+    # frames = BytesIO()
+    # for response in video_responses:
+    #     frames.write(response.content)
+    # frames.seek(0)
 
-    audio = BytesIO()
-    for response in audio_responses:
-        frames.write(response.content)
-    audio.seek(0)
+    # audio = BytesIO()
+    # for response in audio_responses:
+    #     frames.write(response.content)
+    # audio.seek(0)
+
+    video_data = b"".join(response.content for response in video_responses)
+    audio_data = b"".join(response.content for response in audio_responses)
+
+    with (
+        tempfile.NamedTemporaryFile(suffix=".ts", delete=False) as video_temp,
+        tempfile.NamedTemporaryFile(suffix=".ts", delete=False) as audio_temp,
+    ):
+        video_temp.write(video_data)
+        audio_temp.write(audio_data)
+        video_path = video_temp.name
+        audio_path = audio_temp.name
 
     output_path = CLIPS / "clip.mp4"
 
@@ -196,9 +210,9 @@ def main():
             "-f",
             "mpegts",
             "-i",
-            "video_pipe",
+            video_path,
             "-i",
-            "audio_pipe",
+            audio_path,
             "-c:v",
             "copy",
             "-c:a",
@@ -207,15 +221,8 @@ def main():
             "0:v:0",
             "-map",
             "1:a:0",
-            "output.mp4",
+            str(output_path.absolute()),
         ]
-    )
-
-    (
-        ffmpeg.input("pipe:0", format="mpegts")
-        .output(str(output_path), codec="copy")
-        .overwrite_output()
-        .run(input=frames.read())
     )
 
 
