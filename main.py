@@ -191,9 +191,9 @@ def create_clip_from_stream_data(video_data: bytes, audio_data: bytes) -> None:
         video_path = video_temp.name
         audio_path = audio_temp.name
 
-    output_path = CLIPS / f"clip{uuid4()}.mp4"
+    output_path = CLIPS / f"clip_{uuid4()}.mp4"
 
-    # ffmepg -f mpegts -i video_pipe -i audio_pipe -c:v copy -c:a copy -map 0:v:0 -map 1:a:0 output.mp4
+    # ffmpeg -f mpegts -i video_pipe -i audio_pipe -c:v copy -c:a copy -map 0:v:0 -map 1:a:0 output.mp4
     # i hate using ffmpeg
 
     subprocess.run(

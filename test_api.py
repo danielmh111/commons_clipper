@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from rich.pretty import pprint
 
 FEED_URL = "http://data.parliamentlive.tv/api/event/feed"
 
@@ -14,6 +15,7 @@ def find_recent_events() -> list[str]:
 
 def main():
     urls = find_recent_events()
+    pprint(urls)
 
 
 if __name__ == "__main__":
