@@ -1,15 +1,20 @@
 import requests
 from bs4 import BeautifulSoup
-from rich.pretty import pprint
 
-url = "http://data.parliamentlive.tv/api/event/feed"
+FEED_URL = "http://data.parliamentlive.tv/api/event/feed"
 
-response = requests.get(url)
 
-text = response.text
+def find_recent_events() -> list[str]:
+    response = requests.get(FEED_URL)
+    html = BeautifulSoup(response.text, "lxml")
+    urls = [str(url.get("xml:base")) for url in html.find_all("entry")]
 
-soup = BeautifulSoup(text, "lxml")
+    return urls
 
-readable = soup.prettify()
 
-print(readable)
+def main():
+    urls = find_recent_events()
+
+
+if __name__ == "__main__":
+    main()
