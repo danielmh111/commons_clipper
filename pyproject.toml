@@ -5,8 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "beautifulsoup4>=4.14.2",
     "ffmpeg-python>=0.2.0",
     "loguru>=0.7.3",
+    "lxml>=6.0.2",
     "project-paths>=1.1.1",
     "ratelimit>=2.2.1",
     "requests>=2.32.5",
