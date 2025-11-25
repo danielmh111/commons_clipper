@@ -17,6 +17,14 @@ def main():
     urls = find_recent_events()
     pprint(urls)
 
+    test_url = urls[5]
+
+    response = requests.get(test_url)
+    event_html = BeautifulSoup(response.text, "lxml")
+    event_html.prettify
+
+    print(event_html)
+
 
 if __name__ == "__main__":
     main()
