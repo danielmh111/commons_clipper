@@ -1,0 +1,65 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/a5880e80-4879-4aa6-bf34-db4946b61d32?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/a5880e80-4879-4aa6-bf34-db4946b61d32",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "666183db-46c8-5ed4-a4e6-d8c25b100ed3",
+            "description": "Subject: One off session on consequential amendments",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "7aa551b9-c1d4-52c6-8a40-88cd73a2b857",
+            "description": "Witness(es): Jessica De Mounteney, First Parliamentary Counsel, Cabinet Office; Diggory Bailey, Parliamentary Counsel (Director), Cabinet Office",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/a5880e80-4879-4aa6-bf34-db4946b61d32_0D62A9b/thumbnail?w=720&time=2025-11-26T10:34:15Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/a5880e80-4879-4aa6-bf34-db4946b61d32?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "a5880e80-4879-4aa6-bf34-db4946b61d32",
+        "title": "Constitution Committee",
+        "house": "Lords",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T10:29:15Z",
+        "displayEndDate": "2025-11-26T11:38:45Z",
+        "actualLiveStartTime": "2025-11-26T10:15:00Z",
+        "scheduledStartTime": "2025-11-26T10:15:00Z",
+        "scheduledEndTime": "2025-11-26T13:30:00Z",
+        "publishedStartTime": "2025-11-26T10:29:15Z",
+        "actualStartTime": "2025-11-26T10:15:00Z",
+        "actualEndTime": "2025-11-26T11:38:45Z",
+        "channelName": "12",
+        "internalChannelId": 12,
+        "room": "Committee room 3",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

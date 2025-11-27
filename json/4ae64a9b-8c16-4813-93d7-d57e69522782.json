@@ -1,0 +1,209 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/4ae64a9b-8c16-4813-93d7-d57e69522782?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/4ae64a9b-8c16-4813-93d7-d57e69522782",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "df234b62-a56f-5524-a476-ec9bb22e5254",
+            "description": "Oral questions: Culture, Media and Sport",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "20e16ff2-08be-5b1d-b334-0ba230c18dde",
+            "description": "Q1. What steps her Department is taking to increase access to arts and culture. (906587)",
+            "iasDisplayAs": "Steve Witherden MP (Montgomeryshire and Glynd\u0175r, Labour)",
+            "sortOrder": 2
+        },
+        {
+            "id": "91c9e23c-aecf-57db-8f42-e418fc8dc6e8",
+            "description": "Q2. What discussions she has had with Cabinet colleagues on funding for youth services in Buckingham and Bletchley constituency. (906589)",
+            "iasDisplayAs": "Callum Anderson MP (Buckingham and Bletchley, Labour)",
+            "sortOrder": 3
+        },
+        {
+            "id": "2e098d07-43e2-5397-810c-a6dc62142abe",
+            "description": "Q3. What recent progress the Future of TV Distribution Stakeholder Forum has made on its work. (906592)",
+            "iasDisplayAs": "Martin Vickers MP (Brigg and Immingham, Conservative)",
+            "sortOrder": 4
+        },
+        {
+            "id": "5abe197a-67bf-509f-87ca-ec9b4729aa6c",
+            "description": "Q4. What discussions she has had with Cabinet colleagues on funding for youth services. (906594)",
+            "iasDisplayAs": "Mr Tanmanjeet Singh Dhesi MP (Slough, Labour)",
+            "sortOrder": 5
+        },
+        {
+            "id": "340faca8-fa00-5f73-94b7-ca4866b6a2d6",
+            "description": "Q5. What steps she is taking to help support small and medium-sized music recording studios. (906595)",
+            "iasDisplayAs": "Greg Smith MP (Mid Buckinghamshire, Conservative)",
+            "sortOrder": 6
+        },
+        {
+            "id": "445252dc-ac63-5e6b-b6a9-51d2b53d593d",
+            "description": "Q6. What steps she is taking to help increase the number of women and girls taking up sports in Greater Manchester. (906597)",
+            "iasDisplayAs": "Mrs Elsie Blundell MP (Heywood and Middleton North, Labour)",
+            "sortOrder": 7
+        },
+        {
+            "id": "462bb2b2-5a93-5f89-85c9-4cfb3079a10d",
+            "description": "Q7. What assessment she has made of the potential impact of the UK City of Culture and UK Town of Culture competitions on local communities. (906598)",
+            "iasDisplayAs": "Andrew Cooper MP (Mid Cheshire, Labour)",
+            "sortOrder": 8
+        },
+        {
+            "id": "b67f252a-2f8c-5872-8f67-e4e2fd826e20",
+            "description": "Q8. What assessment she has made of the potential merits of introducing a cap on the resale of concert tickets. (906599)",
+            "iasDisplayAs": "Richard Baker MP (Glenrothes and Mid Fife, Labour)",
+            "sortOrder": 9
+        },
+        {
+            "id": "790c7bfb-5a9d-5ac7-bc79-2a9ee354a308",
+            "description": "Q9. What recent progress the Future of TV Distribution Stakeholder Forum has made on its work. (906601)",
+            "iasDisplayAs": "Rt Hon David Mundell MP (Dumfriesshire, Clydesdale and Tweeddale, Conservative)",
+            "sortOrder": 10
+        },
+        {
+            "id": "6eaf119e-5ba3-5b93-b54e-d2048352776c",
+            "description": "Q10. What discussions she has had with the BBC on renewal of the Charter. (906602)",
+            "iasDisplayAs": "Rt Hon Sir John Whittingdale MP (Maldon, Conservative)",
+            "sortOrder": 11
+        },
+        {
+            "id": "8e81fc7e-d04e-574d-a7f2-8415ebc8f6a1",
+            "description": "Q11. What discussions she has had with the Chancellor of the Exchequer on gambling duties. (906603)",
+            "iasDisplayAs": "Charlie Dewhirst MP (Bridlington and The Wolds, Conservative)",
+            "sortOrder": 12
+        },
+        {
+            "id": "51eabee4-d253-5030-8bd0-57d468665b80",
+            "description": "Topical questions: Culture, Media and Sport",
+            "iasDisplayAs": "",
+            "sortOrder": 13
+        },
+        {
+            "id": "148e4277-bbbb-5be1-907f-e040ceda2709",
+            "description": "Oral questions: Church Commissioners and House of Commons Commission and Public Accounts Commission and Restoration and Renewal Client Board and Speaker\u2019s Committee on the Electoral Commission",
+            "iasDisplayAs": "",
+            "sortOrder": 14
+        },
+        {
+            "id": "e196d89f-7990-5cef-b930-1d78acf8a660",
+            "description": "Q1. To ask the hon. Member for Blaenau Gwent and Rhymney, representing the House of Commons Commission, what steps the Commission has taken to enable more schools to visit the Palace of Westminster. (906560)",
+            "iasDisplayAs": "Peter Prinsley MP (Bury St Edmunds and Stowmarket, Labour)",
+            "sortOrder": 15
+        },
+        {
+            "id": "3ea72fbc-cf30-56a6-809f-6a9f7bcc8875",
+            "description": "Q2. To ask the hon. Member for Battersea, representing the Church Commissioners, what guidance the Church Commissioners have received from the Charity Commission on changes proposed under the draft National Church Governance Measure. (906561)",
+            "iasDisplayAs": "Danny Kruger MP (East Wiltshire, Reform UK)",
+            "sortOrder": 16
+        },
+        {
+            "id": "b2753a32-4be1-5553-9bd9-d7d58621ac82",
+            "description": "Q3. To ask the hon. Member for Blaenau Gwent and Rhymney, representing the House of Commons Commission, whether the Commission is taking steps to create a domestic abuse policy for the House of Commons. (906562)",
+            "iasDisplayAs": "Sonia Kumar MP (Dudley, Labour)",
+            "sortOrder": 17
+        },
+        {
+            "id": "48c05038-ebaf-5186-a26d-ccc1e9538097",
+            "description": "Q4. To ask the hon. Member for Battersea, representing the Church Commissioners, what discussions the Commissioners have had with the House of Bishops on the decision to move to a two thirds majority requirement in Synod to progress the recommendations of Living in Love and Faith. (906563)",
+            "iasDisplayAs": "Steve Race MP (Exeter, Labour)",
+            "sortOrder": 18
+        },
+        {
+            "id": "19766cc3-8441-5598-b04c-7a28cef75cde",
+            "description": "Q5. To ask the hon. Member for Battersea, representing the Church Commissioners, what steps the Church of England is taking to increase the number of vicars in rural parishes. (906564",
+            "iasDisplayAs": "Charlie Dewhirst MP (Bridlington and The Wolds, Conservative)",
+            "sortOrder": 19
+        },
+        {
+            "id": "54efdcaa-af5a-5d1a-af5f-80ea6e4d77dd",
+            "description": "Q6. To ask the hon. Member for Battersea, representing the Church Commissioners, what support the Church of England is providing to Christians in the Occupied Palestinian Territories. (906565)",
+            "iasDisplayAs": "James Asser MP (West Ham and Beckton, Labour)",
+            "sortOrder": 20
+        },
+        {
+            "id": "035da170-fc64-50c9-917c-102466c59897",
+            "description": "Q7. To ask the hon. Member for Blaenau Gwent and Rhymney, representing the House of Commons Commission, what steps the Commission is taking to provide technology to improve the productivity of hon. Members. (906566)",
+            "iasDisplayAs": "Dame Chi Onwurah MP (Newcastle upon Tyne Central and West, Labour)",
+            "sortOrder": 21
+        },
+        {
+            "id": "6cda2e04-eecd-5290-925b-effa2e3f01c4",
+            "description": "Q8. To ask the hon. Member for Battersea, representing the Church Commissioners, what steps the Church Commissioners are taking to increase the number of ordained clergy. (906569)",
+            "iasDisplayAs": "Martin Vickers MP (Brigg and Immingham, Conservative)",
+            "sortOrder": 22
+        },
+        {
+            "id": "d71c61d0-4ea0-55e9-8dfa-6e2429e91f17",
+            "description": "Q9. To ask the hon. Member for Battersea, representing the Church Commissioners, what steps the Church of England is taking to install solar power for churches. (906571)",
+            "iasDisplayAs": "Si\u00e2n Berry MP (Brighton Pavilion, Green Party)",
+            "sortOrder": 23
+        },
+        {
+            "id": "a71ed6a8-546a-53db-b903-c5b2ddf35bc5",
+            "description": "Q10. To ask the hon. Member for Battersea, representing the Church Commissioners, what steps the Church of England is taking to provide new affordable homes. (906570)",
+            "iasDisplayAs": "Kevin Bonavia MP (Stevenage, Labour)",
+            "sortOrder": 24
+        },
+        {
+            "id": "0f1635bd-4bfa-51e3-b4c2-c2e64a152ae5",
+            "description": "Urgent question: To ask the Secretary of State for Justice if he will make a statement on reported plans to restrict the right to trial by jury",
+            "iasDisplayAs": "",
+            "sortOrder": 25
+        },
+        {
+            "id": "9efdfc92-b8c8-50ea-9cad-1709514aec89",
+            "description": "Business Statement: Business Questions to the Leader of the House",
+            "iasDisplayAs": "",
+            "sortOrder": 26
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/4ae64a9b-8c16-4813-93d7-d57e69522782_0D62A9b/thumbnail?w=720&time=2025-11-27T09:39:30Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/4ae64a9b-8c16-4813-93d7-d57e69522782?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "4ae64a9b-8c16-4813-93d7-d57e69522782",
+        "title": "BSL - House of Commons",
+        "house": "Commons",
+        "business": "Chamber",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-27T09:34:30Z",
+        "displayEndDate": "2025-11-27T12:28:41Z",
+        "actualLiveStartTime": "2025-11-27T09:15:00Z",
+        "scheduledStartTime": "2025-11-27T09:15:00Z",
+        "scheduledEndTime": "2025-11-27T15:00:00Z",
+        "publishedStartTime": "2025-11-27T09:34:30Z",
+        "actualStartTime": "2025-11-27T09:15:00Z",
+        "actualEndTime": "2025-11-27T12:28:41Z",
+        "channelName": "6",
+        "internalChannelId": 6,
+        "room": "Studio 1",
+        "eventType": "Main chamber",
+        "productionSource": "TV",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

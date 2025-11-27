@@ -1,0 +1,77 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/e23c0403-09eb-48c1-b78d-d831277e4954?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/e23c0403-09eb-48c1-b78d-d831277e4954",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "8d800c26-98c0-51b0-8a61-3a7bbdc56089",
+            "description": "Subject: Matter referred on 4 September 2025: actions of the Charity Commission",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "03183941-5857-5a6f-b409-ea53a632575c",
+            "description": "Witness(es): Saira Salimi, Speaker's Counsel, House of Commons",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        },
+        {
+            "id": "2cdc892f-90a3-5c4d-8d91-a33b466f6e8e",
+            "description": "Witness(es): Karl Banister, Director of Operations, Legal and Clinical and Deputy Ombudsman, Parliamentary and Health Service Ombudsman (PHSO)",
+            "iasDisplayAs": "",
+            "sortOrder": 3
+        },
+        {
+            "id": "446b63b4-6805-5d0a-ab25-6d45720191c8",
+            "description": "Witness(es): Mark Simms OBE, Interim Chair, Charity Commission for England and Wales; David Holdsworth, CEO, Charity Commission for England and Wales; Felix Rechtman, Head of Litigation, Charity Commission for England and Wales",
+            "iasDisplayAs": "",
+            "sortOrder": 4
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/e23c0403-09eb-48c1-b78d-d831277e4954_0D62A9b/thumbnail?w=720&time=2025-11-26T09:10:54Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/e23c0403-09eb-48c1-b78d-d831277e4954?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "e23c0403-09eb-48c1-b78d-d831277e4954",
+        "title": "Committee of Privileges",
+        "house": "Commons",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T09:05:54Z",
+        "displayEndDate": "2025-11-26T10:24:15Z",
+        "actualLiveStartTime": "2025-11-26T08:45:00Z",
+        "scheduledStartTime": "2025-11-26T08:45:00Z",
+        "scheduledEndTime": "2025-11-26T12:00:00Z",
+        "publishedStartTime": "2025-11-26T09:05:54Z",
+        "actualStartTime": "2025-11-26T08:45:00Z",
+        "actualEndTime": "2025-11-26T10:24:15Z",
+        "channelName": "9",
+        "internalChannelId": 9,
+        "room": "Committee room 5",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "f3e80225-e852-5c19-bc37-84fc39e82ee3",
+            "description": "Subject: Drought Preparedness",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "f07412e6-f3f5-515b-b7a0-85d635b6bc87",
+            "description": "Witness(es): Rob Lawson, Chair of Water Resources Technical Panel, Chartered Institution of Water and Environmental Management; Professor Jim Hall, Professor of Climate and Environmental Risks, University of Oxford; Dr Chris Counsell, Technical Director, HR Wallingford",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f_0D62A9b/thumbnail?w=720&time=2025-11-26T10:05:45Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "e05c422e-a4bc-4a43-9f9a-324ca69a2d4f",
+        "title": "Environment and Climate Change Committee",
+        "house": "Lords",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T10:00:45Z",
+        "displayEndDate": "2025-11-26T11:37:00Z",
+        "actualLiveStartTime": "2025-11-26T09:45:00Z",
+        "scheduledStartTime": "2025-11-26T09:45:00Z",
+        "scheduledEndTime": "2025-11-26T13:00:00Z",
+        "publishedStartTime": "2025-11-26T10:00:45Z",
+        "actualStartTime": "2025-11-26T09:45:00Z",
+        "actualEndTime": "2025-11-26T11:37:00Z",
+        "channelName": "11",
+        "internalChannelId": 11,
+        "room": "Committee room 4",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

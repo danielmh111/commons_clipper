@@ -1,0 +1,65 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/1281bd50-b2ad-440c-8c4d-d596384c3085?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/1281bd50-b2ad-440c-8c4d-d596384c3085",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "2fc79664-cd19-5d03-86a2-37de6e3095f8",
+            "description": "Westminster Hall debate: Availability of driving tests in the South East",
+            "iasDisplayAs": "Dr Al Pinkerton MP (Surrey Heath, Liberal Democrat)",
+            "sortOrder": 1
+        },
+        {
+            "id": "bb707b7a-7114-53e9-8aea-70f84c6137a6",
+            "description": "Westminster Hall debate: Children of alcoholics",
+            "iasDisplayAs": "George Freeman MP (Mid Norfolk, Conservative)",
+            "sortOrder": 2
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/1281bd50-b2ad-440c-8c4d-d596384c3085_0D62A9b/thumbnail?w=720&time=2025-11-26T09:35:01Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/1281bd50-b2ad-440c-8c4d-d596384c3085?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "1281bd50-b2ad-440c-8c4d-d596384c3085",
+        "title": "Westminster Hall",
+        "house": "Commons",
+        "business": "Chamber",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T09:30:01Z",
+        "displayEndDate": "2025-11-26T11:32:42Z",
+        "actualLiveStartTime": "2025-11-26T09:15:00Z",
+        "scheduledStartTime": "2025-11-26T09:15:00Z",
+        "scheduledEndTime": "2025-11-26T11:45:00Z",
+        "publishedStartTime": "2025-11-26T09:30:01Z",
+        "actualStartTime": "2025-11-26T09:15:00Z",
+        "actualEndTime": "2025-11-26T11:32:42Z",
+        "channelName": "3",
+        "internalChannelId": 3,
+        "room": "Westminster Hall",
+        "eventType": "Second chamber",
+        "productionSource": "TV",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

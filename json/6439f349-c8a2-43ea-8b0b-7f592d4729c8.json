@@ -1,0 +1,71 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/6439f349-c8a2-43ea-8b0b-7f592d4729c8?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/6439f349-c8a2-43ea-8b0b-7f592d4729c8",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "9347124f-5bbe-553b-8cb1-b12376ba87ed",
+            "description": "Subject: Small business strategy",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "6bfa3e68-2c9c-54d4-9d09-64d9c1601450",
+            "description": "Witness(es): Ms Wendy Martin, Director, National Trading Standards; Martin Swain, Director of Intelligence and Law Enforcement Engagement, Companies House; Sal Melki, Deputy Director, Illicit Finance, National Crime Agency",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        },
+        {
+            "id": "4b455940-e7bd-5a2e-a4e3-67d0937d9b08",
+            "description": "Witness(es): Blair McDougall MP, Minister for Small Business and Economic Transformation, Department for Business and Trade; Isobel Stephen, Director General, Domestic and International Markets and Exports, Department for Business and Trade; Ros Wall, Director of Small Business Strategy, Department for Business and Trade",
+            "iasDisplayAs": "",
+            "sortOrder": 3
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/6439f349-c8a2-43ea-8b0b-7f592d4729c8_0D62A9b/thumbnail?w=720&time=2025-11-25T15:05:10Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/6439f349-c8a2-43ea-8b0b-7f592d4729c8?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "6439f349-c8a2-43ea-8b0b-7f592d4729c8",
+        "title": "Business and Trade Committee",
+        "house": "Commons",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-25T15:00:10Z",
+        "displayEndDate": "2025-11-25T16:52:10Z",
+        "actualLiveStartTime": "2025-11-25T14:45:00Z",
+        "scheduledStartTime": "2025-11-25T14:45:00Z",
+        "scheduledEndTime": "2025-11-25T18:00:00Z",
+        "publishedStartTime": "2025-11-25T15:00:10Z",
+        "actualStartTime": "2025-11-25T14:45:00Z",
+        "actualEndTime": "2025-11-25T16:52:10Z",
+        "channelName": "14",
+        "internalChannelId": 14,
+        "room": "Grimond room",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

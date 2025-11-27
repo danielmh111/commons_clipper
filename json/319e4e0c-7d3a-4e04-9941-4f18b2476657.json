@@ -1,0 +1,59 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/319e4e0c-7d3a-4e04-9941-4f18b2476657?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/319e4e0c-7d3a-4e04-9941-4f18b2476657",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "f6ad1041-9a97-5d5c-bbe9-652043035dc8",
+            "description": "Legislation: Tobacco and Vapes Bill - committee stage (day 7)",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/319e4e0c-7d3a-4e04-9941-4f18b2476657_0D62A9b/thumbnail?w=720&time=2025-11-26T15:50:16Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/319e4e0c-7d3a-4e04-9941-4f18b2476657?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "319e4e0c-7d3a-4e04-9941-4f18b2476657",
+        "title": "Lords Grand Committee",
+        "house": "Lords",
+        "business": "Chamber",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T15:45:16Z",
+        "displayEndDate": "2025-11-26T17:56:00Z",
+        "actualLiveStartTime": "2025-11-26T15:30:00Z",
+        "scheduledStartTime": "2025-11-26T15:30:00Z",
+        "scheduledEndTime": "2025-11-26T21:00:00Z",
+        "publishedStartTime": "2025-11-26T15:45:16Z",
+        "actualStartTime": "2025-11-26T15:30:00Z",
+        "actualEndTime": "2025-11-26T17:56:00Z",
+        "channelName": "8",
+        "internalChannelId": 8,
+        "room": "Moses Room",
+        "eventType": "Second chamber",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

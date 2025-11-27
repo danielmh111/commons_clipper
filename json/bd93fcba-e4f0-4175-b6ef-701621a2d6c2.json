@@ -1,0 +1,167 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/bd93fcba-e4f0-4175-b6ef-701621a2d6c2?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/bd93fcba-e4f0-4175-b6ef-701621a2d6c2",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "3eb9f83c-eefb-5656-9ad1-9f6b84bea2f6",
+            "description": "Oral questions: Scotland",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "9aef1d64-dc9f-5000-a942-05605b362e29",
+            "description": "Q1. What discussions he has had with the Secretary of State for Energy Security and Net Zero on the potential for new nuclear power sites in Scotland. (906510)",
+            "iasDisplayAs": "Mr Peter Bedford MP (Mid Leicestershire, Conservative)",
+            "sortOrder": 2
+        },
+        {
+            "id": "db7dd323-d39c-55af-8953-acc0f04a23d9",
+            "description": "Q2. What discussions he has had with the Chancellor of the Exchequer on the potential impact of her policies on the cost of living in Scotland. (906511)",
+            "iasDisplayAs": "Rt Hon Liz Saville Roberts MP (Dwyfor Meirionnydd, Plaid Cymru)",
+            "sortOrder": 3
+        },
+        {
+            "id": "09504e45-f04c-54f6-93e9-436eda4085b2",
+            "description": "Q3. What assessment he has made with Cabinet colleagues of recent trends in levels of economic growth in Scotland. (906512)",
+            "iasDisplayAs": "Jerome Mayhew MP (Broadland and Fakenham, Conservative)",
+            "sortOrder": 4
+        },
+        {
+            "id": "c59d695c-2bc9-5f3f-825a-5719890eeb4d",
+            "description": "Q4. What discussions he has had with the Secretary of State for the Home Department on the potential impact of the UK's asylum and returns policies on Scotland. (906513)",
+            "iasDisplayAs": "Pete Wishart MP (Perth and Kinross-shire, Scottish National Party)",
+            "sortOrder": 5
+        },
+        {
+            "id": "1458b758-aecd-58d6-9b1e-7ad450e3c3cc",
+            "description": "Q5. What discussions he has had with the Scottish Government on skills, development and training for the Forth Valley area. (906514)",
+            "iasDisplayAs": "Chris Kane MP (Stirling and Strathallan, Labour)",
+            "sortOrder": 6
+        },
+        {
+            "id": "1e6af60c-1ebb-5af9-bd50-ae2757163567",
+            "description": "Q6. What steps he is taking with Cabinet colleagues to support skills and training in the defence sector in Scotland. (906515)",
+            "iasDisplayAs": "Richard Baker MP (Glenrothes and Mid Fife, Labour)",
+            "sortOrder": 7
+        },
+        {
+            "id": "bb54d065-286b-5f38-aae2-9f83c4633d6b",
+            "description": "Q7. What steps he is taking with Cabinet colleagues to support regeneration in Scotland through the Pride in Place programme. (906516)",
+            "iasDisplayAs": "Elaine Stewart MP (Ayr, Carrick and Cumnock, Labour)",
+            "sortOrder": 8
+        },
+        {
+            "id": "ceb8cc8c-f5fb-50c3-b29c-cf2840f3e66b",
+            "description": "Q8. What assessment he has made of the potential impact of changes to Agricultural Property Relief and Business Property Relief on Scottish family farms. (906517)",
+            "iasDisplayAs": "Sarah Bool MP (South Northamptonshire, Conservative)",
+            "sortOrder": 9
+        },
+        {
+            "id": "9e8a219b-6d5f-5c5e-b65f-e7216ea9595b",
+            "description": "Q9. What assessment he has made of the impact of the Windsor Framework on trade between Scotland and Northern Ireland. (906518)",
+            "iasDisplayAs": "Alex Easton MP (North Down, Independent)",
+            "sortOrder": 10
+        },
+        {
+            "id": "33525937-4ec9-56eb-b2b3-ecfc4253d8f1",
+            "description": "Q10. What discussions he has had with the Chancellor of the Exchequer on the potential impact of her policies on the cost of living in Scotland. (906519)",
+            "iasDisplayAs": "Kirsty Blackman MP (Aberdeen North, Scottish National Party)",
+            "sortOrder": 11
+        },
+        {
+            "id": "6b85dd68-c3da-507b-bc92-374fb2985d3a",
+            "description": "Q11. What steps he is taking with Cabinet colleagues to help ensure that UK public bodies in Scotland implement the For Women Scotland Ltd v The Scottish Ministers Supreme Court judgment. (906520)",
+            "iasDisplayAs": "Rebecca Paul MP (Reigate, Conservative)",
+            "sortOrder": 12
+        },
+        {
+            "id": "2d9d7bcd-8cb6-59d5-ae4c-5d8fa6b71e65",
+            "description": "Q12. What discussions he has had with the Chancellor of the Exchequer on the potential impact of her policies on the cost of living in Scotland. (906521)",
+            "iasDisplayAs": "Seamus Logan MP (Aberdeenshire North and Moray East, Scottish National Party)",
+            "sortOrder": 13
+        },
+        {
+            "id": "7a18f4b3-fd1d-5262-97b8-0022cf0261b2",
+            "description": "Q13. What discussions he has had with the Scottish Government on support for transport services for Scottish islands. (906522)",
+            "iasDisplayAs": "Andrew George MP (St Ives, Liberal Democrat)",
+            "sortOrder": 14
+        },
+        {
+            "id": "aa7e928c-dee5-5964-bbf8-309341d8c9da",
+            "description": "Q14. What discussions he has had with the Secretary of State for Energy Security and Net Zero on the potential for new nuclear power sites in Scotland. (906523)",
+            "iasDisplayAs": "Sir Geoffrey Clifton-Brown MP (North Cotswolds, Conservative)",
+            "sortOrder": 15
+        },
+        {
+            "id": "fe1b7469-134e-5438-aab1-705bfc3efc5c",
+            "description": "Q15. What discussions he has had with the Secretary of State for Energy Security and Net Zero on the potential for new nuclear power sites in Scotland. (906524)",
+            "iasDisplayAs": "Alison Griffiths MP (Bognor Regis and Littlehampton, Conservative)",
+            "sortOrder": 16
+        },
+        {
+            "id": "904ebcfd-2a6e-5201-8419-5ba940cea57f",
+            "description": "Prime Minister's Question Time",
+            "iasDisplayAs": "",
+            "sortOrder": 17
+        },
+        {
+            "id": "c3f03475-8620-5151-b5f5-26052ecf4acf",
+            "description": "Financial Statement: Financial Statement and Budget Report At the end of the Chancellor\u2019s Statement, the first Budget Resolution will be moved and debate on the Budget Resolutions will take place",
+            "iasDisplayAs": "",
+            "sortOrder": 18
+        },
+        {
+            "id": "d2073858-57cd-5891-9459-95f5cba8f95e",
+            "description": "Adjournment: Potential merits of upgrading Grove Park railway station",
+            "iasDisplayAs": "Janet Daby MP (Lewisham East, Labour)",
+            "sortOrder": 19
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/bd93fcba-e4f0-4175-b6ef-701621a2d6c2_0D62A9b/thumbnail?w=720&time=2025-11-26T11:38:50Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/bd93fcba-e4f0-4175-b6ef-701621a2d6c2?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "bd93fcba-e4f0-4175-b6ef-701621a2d6c2",
+        "title": "House of Commons",
+        "house": "Commons",
+        "business": "Chamber",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T11:33:50Z",
+        "displayEndDate": "2025-11-26T19:25:17Z",
+        "actualLiveStartTime": "2025-11-26T11:00:00Z",
+        "scheduledStartTime": "2025-11-26T11:00:00Z",
+        "scheduledEndTime": "2025-11-26T20:00:00Z",
+        "publishedStartTime": "2025-11-26T11:33:50Z",
+        "actualStartTime": "2025-11-26T11:00:00Z",
+        "actualEndTime": "2025-11-26T19:25:17Z",
+        "channelName": "1",
+        "internalChannelId": 1,
+        "room": "Commons Chamber",
+        "eventType": "Main chamber",
+        "productionSource": "TV",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

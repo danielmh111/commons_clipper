@@ -1,0 +1,101 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/bff367da-6573-486a-9d27-064ff43d3cad?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/bff367da-6573-486a-9d27-064ff43d3cad",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "3cc41afc-ceab-5064-bd78-7a4e3cfe81c5",
+            "description": "Oral questions: Supporting local authorities and charities in providing emergency accommodation for those experiencing domestic abuse",
+            "iasDisplayAs": "Baroness Donaghy (Labour)",
+            "sortOrder": 1
+        },
+        {
+            "id": "b69343fb-e9e8-5986-97a8-c80f3dac145f",
+            "description": "Oral questions: Ensuring charities cannot use 'the advancement of religion' charitable purpose to advance ideologies which promote misogyny, sexism or violence against women",
+            "iasDisplayAs": "Baroness Burt of Solihull (Liberal Democrat)",
+            "sortOrder": 2
+        },
+        {
+            "id": "bfb1ab67-1e4e-5d1c-a830-6822cabce61c",
+            "description": "Oral questions: Potential impact on economic growth of trends in the number of visas granted to highly skilled people",
+            "iasDisplayAs": "Baroness Alexander of Cleveden (Labour)",
+            "sortOrder": 3
+        },
+        {
+            "id": "9db9f072-058a-5809-87bd-db674e69d872",
+            "description": "Oral questions: Alleged inaccuracies in a West Midlands police force report on the alleged activities of Maccabi Tel Aviv fans ahead of the recent match against Aston Villa",
+            "iasDisplayAs": "Lord Cryer (Labour)",
+            "sortOrder": 4
+        },
+        {
+            "id": "554be2a0-b5f7-5888-a9fd-b9639a66de60",
+            "description": "Urgent Question Repeat: Ministerial Code",
+            "iasDisplayAs": "",
+            "sortOrder": 5
+        },
+        {
+            "id": "b209ad37-48f7-5f2c-b247-a77786f5e831",
+            "description": "Legislation: Sentencing Bill \u2013 committee stage (day 1) - part one",
+            "iasDisplayAs": "",
+            "sortOrder": 6
+        },
+        {
+            "id": "fd979ca5-2d8f-5ff9-9d74-7d40aef5aa8b",
+            "description": "Statement: G20 and Ukraine",
+            "iasDisplayAs": "",
+            "sortOrder": 7
+        },
+        {
+            "id": "c01d9204-9ea9-5cd2-9c77-b30815361562",
+            "description": "Legislation: Sentencing Bill \u2013 committee stage (day 1) - part two",
+            "iasDisplayAs": "",
+            "sortOrder": 8
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/bff367da-6573-486a-9d27-064ff43d3cad_0D62A9b/thumbnail?w=720&time=2025-11-26T15:09:57Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/bff367da-6573-486a-9d27-064ff43d3cad?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "bff367da-6573-486a-9d27-064ff43d3cad",
+        "title": "House of Lords",
+        "house": "Lords",
+        "business": "Chamber",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T15:04:57Z",
+        "displayEndDate": "2025-11-26T20:39:07Z",
+        "actualLiveStartTime": "2025-11-26T14:30:00Z",
+        "scheduledStartTime": "2025-11-26T14:30:00Z",
+        "scheduledEndTime": "2025-11-26T23:00:00Z",
+        "publishedStartTime": "2025-11-26T15:04:57Z",
+        "actualStartTime": "2025-11-26T14:30:00Z",
+        "actualEndTime": "2025-11-26T20:39:07Z",
+        "channelName": "2",
+        "internalChannelId": 2,
+        "room": "Lords Chamber",
+        "eventType": "Main chamber",
+        "productionSource": "TV",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

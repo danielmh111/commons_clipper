@@ -1,0 +1,71 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/de0a4022-a9f2-488a-887d-cfe9a345d818?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/de0a4022-a9f2-488a-887d-cfe9a345d818",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "4197646e-df7a-5eea-8df0-a90b5b026e68",
+            "description": "Subject: Young people who are NEET and the transfer of Skills to DWP",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "b0b2d132-fe19-5bd5-a6c4-c4810373b272",
+            "description": "Witness(es): Louise Murphy, Senior Economist, Resolution Foundation; Barry Fletcher, CEO, Youth Futures Foundation; Professor Neil Harrison, Professor of Education and Social Justice, School of Education, University of Exeter; Professor David Taylor-Robinson, Professor of Public Health and Policy and W.H. Duncan Chair in Health Inequalities, University of Liverpool",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        },
+        {
+            "id": "57b61da1-70b9-5bad-8c25-4ce27bca7b7d",
+            "description": "Witness(es): Emily Rock, CEO Association of Apprentices and Engagement Director, The St Martin\u2019s Group; Ben Rowland, CEO, Association of Employment and Learning Providers; Fiona Aldridge, Chief Executive, Skills Federation; Sam Avanzo Windett, Deputy Director, Learning and Work Institute",
+            "iasDisplayAs": "",
+            "sortOrder": 3
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/de0a4022-a9f2-488a-887d-cfe9a345d818_0D62A9b/thumbnail?w=720&time=2025-11-26T09:22:06Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/de0a4022-a9f2-488a-887d-cfe9a345d818?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "de0a4022-a9f2-488a-887d-cfe9a345d818",
+        "title": "Work and Pensions Committee",
+        "house": "Commons",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-26T09:17:06Z",
+        "displayEndDate": "2025-11-26T11:18:27Z",
+        "actualLiveStartTime": "2025-11-26T09:00:00Z",
+        "scheduledStartTime": "2025-11-26T09:00:00Z",
+        "scheduledEndTime": "2025-11-26T12:15:00Z",
+        "publishedStartTime": "2025-11-26T09:17:06Z",
+        "actualStartTime": "2025-11-26T09:00:00Z",
+        "actualEndTime": "2025-11-26T11:18:27Z",
+        "channelName": "10",
+        "internalChannelId": 10,
+        "room": "Committee room 6",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/e6d1b6e3-95fe-4718-b02e-c015cd4acd34?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/e6d1b6e3-95fe-4718-b02e-c015cd4acd34",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "0976a92e-7733-5391-b625-03a2388231b8",
+            "description": "Subject: Proposals for backbench debates",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "1c444578-59c6-5ed9-be70-c6461cfe4051",
+            "description": "Witness(es): Members of Parliament, Members of Parliament, House of Commons",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/e6d1b6e3-95fe-4718-b02e-c015cd4acd34_0D62A9b/thumbnail?w=720&time=2025-11-25T16:19:32Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/e6d1b6e3-95fe-4718-b02e-c015cd4acd34?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "e6d1b6e3-95fe-4718-b02e-c015cd4acd34",
+        "title": "Backbench Business Committee",
+        "house": "Commons",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-25T16:14:32Z",
+        "displayEndDate": "2025-11-25T16:49:32Z",
+        "actualLiveStartTime": "2025-11-25T16:00:00Z",
+        "scheduledStartTime": "2025-11-25T16:00:00Z",
+        "scheduledEndTime": "2025-11-25T19:15:00Z",
+        "publishedStartTime": "2025-11-25T16:14:32Z",
+        "actualStartTime": "2025-11-25T16:00:00Z",
+        "actualEndTime": "2025-11-25T16:49:32Z",
+        "channelName": "16",
+        "internalChannelId": 16,
+        "room": "Committee room 16",
+        "eventType": "Select committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}

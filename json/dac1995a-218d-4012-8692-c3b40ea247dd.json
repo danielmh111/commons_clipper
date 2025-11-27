@@ -1,0 +1,83 @@
+{
+    "embedCode": "<iframe src=\"https://videoplayback.parliamentlive.tv/Player/Index/dac1995a-218d-4012-8692-c3b40ea247dd?audioOnly=False&amp;autoStart=False&amp;script=False\" id=\"UKPPlayer\" name=\"UKPPlayer\" title=\"UK Parliament Player\" seamless=\"seamless\" frameborder=\"0\" allowfullscreen style=\"width:100%;height:100%;\" allow=\"encrypted-media; autoplay; fullscreen\"></iframe>",
+    "legacyEmbedCode": null,
+    "logMoments": {
+        "results": [],
+        "total": 0,
+        "containsLogMoments": true,
+        "searchHighlights": []
+    },
+    "pageUrl": "https://parliamentlive.tv/event/index/dac1995a-218d-4012-8692-c3b40ea247dd",
+    "shortWebPageUrl": null,
+    "requestedInPoint": null,
+    "requestedOutPoint": null,
+    "stacks": [
+        {
+            "id": "ff9dcc17-fd4c-58d2-9af0-5db9c88d4407",
+            "description": "To consider the Bill",
+            "iasDisplayAs": "",
+            "sortOrder": 1
+        },
+        {
+            "id": "9b11438a-c23d-565a-90cd-a208a5c922bb",
+            "description": "Witness(es): Pete Weatherby KC, Director, Hillsborough Law Now",
+            "iasDisplayAs": "",
+            "sortOrder": 2
+        },
+        {
+            "id": "722e7f90-2390-55df-ad7f-7f47bdcd6a79",
+            "description": "Further to consider the Bill",
+            "iasDisplayAs": "",
+            "sortOrder": 3
+        },
+        {
+            "id": "beb8e10e-35c3-5f58-abb8-a311196444a5",
+            "description": "Witness(es): Tom Guest, Deputy Director of Policy, Crown Prosecution Service; Professor Penney Lewis, Law Commissioner for Criminal Law, Law Commission",
+            "iasDisplayAs": "",
+            "sortOrder": 4
+        },
+        {
+            "id": "8b424f49-a29f-5641-a95e-df353f032c82",
+            "description": "Witness(es): Margaret Aspinall; Charlotte Hennessy; Steve Kelly; Sue Roberts",
+            "iasDisplayAs": "",
+            "sortOrder": 5
+        }
+    ],
+    "thumbnailUrl": "https://exposure.api.redbee.live:443/v1/customer/UKParliament/businessunit/ParliamentLive/content/asset/dac1995a-218d-4012-8692-c3b40ea247dd_0D62A9b/thumbnail?w=720&time=2025-11-27T11:35:02Z",
+    "scriptableEmbedCode": "<div id=\"embedCodeIFrame\"></div>\n<script type=\"text/javascript\">\n    var src = \"https://videoplayback.parliamentlive.tv/Player/Index/dac1995a-218d-4012-8692-c3b40ea247dd?audioOnly=False&amp;autoStart=False&amp;script=True\";\n    src += \"#\" + encodeURIComponent(document.location.href);\n    $(\"#embedCodeIFrame\").replaceWith(\"<iframe src=\\\"\" + src + \"\\\" id=\\\"UKPPlayer\\\" name=\\\"UKPPlayer\\\" title=\\\"UK Parliament Player\\\" seamless=\\\"seamless\\\" frameBorder=\\\"0\\\" allowfullscreen style=\\\"width:100%;height:100%;\\\" allow=\\\"encrypted-media; autoplay; fullscreen\\\"></iframe>\");\n</script>",
+    "requestedAudioOnly": false,
+    "requestedAutoStart": false,
+    "event": {
+        "id": "dac1995a-218d-4012-8692-c3b40ea247dd",
+        "title": "Public Office (Accountability) Bill",
+        "house": "Commons",
+        "business": "Committee",
+        "states": {
+            "planningState": "CONFIRMED",
+            "recordingState": "COMPLETED",
+            "recordedState": "AVAILABLE",
+            "playerState": "ARCHIVE"
+        },
+        "displayStartDate": "2025-11-27T11:30:02Z",
+        "displayEndDate": "2025-11-27T13:05:57Z",
+        "actualLiveStartTime": "2025-11-27T11:15:00Z",
+        "scheduledStartTime": "2025-11-27T11:15:00Z",
+        "scheduledEndTime": "2025-11-27T13:45:00Z",
+        "publishedStartTime": "2025-11-27T11:30:02Z",
+        "actualStartTime": "2025-11-27T11:15:00Z",
+        "actualEndTime": "2025-11-27T13:05:57Z",
+        "channelName": "5",
+        "internalChannelId": 5,
+        "room": "Committee room 4a",
+        "eventType": "Public Bill committee",
+        "productionSource": "Automated Camera System",
+        "legacyMeetingId": null,
+        "externalLocation": "",
+        "subTitle": "",
+        "homeFilters": {
+            "live": false,
+            "liveAndArchive": true,
+            "next": false
+        }
+    }
+}
