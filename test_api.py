@@ -1,5 +1,6 @@
 import json
 from typing import Any
+from uuid import uuid4
 
 import requests
 from bs4 import BeautifulSoup
@@ -35,6 +36,36 @@ def extract_playback_url(embedding_code: list[str]) -> list[str | Any]:
     return [iframe.get("src") for iframe in iframes]
 
 
+def get_session_token():
+    response = requests.post(
+        "https://exposure.api.redbee.live/v2/customer/UKParliament/businessunit/ParliamentLive/auth/anonymous",
+        json={
+            "device": {"type": "WEB", "name": "Python script"},
+            "deviceId": str(uuid4()),
+        },
+    )
+    return response.json().get("sessionToken")
+
+
+def get_asset_material_ids(event_ids, session_token) -> list[tuple[str, str]]:
+    source_urls = [
+        f"https://exposure.api.redbee.live/v2/customer/UKParliament/businessunit/ParliamentLive/entitlement/{event_id}_0D62A9b/play"
+        for event_id in event_ids
+    ]
+
+    responses = [
+        requests.get(
+            url=source_url, headers={"Authorization": f"Bearer {session_token}"}
+        )
+        for source_url in source_urls
+    ]
+
+    data: list[dict] = [response.json() for response in responses]
+    ids = [(datum.get("assetId", ""), datum.get("materialId", "")) for datum in data]
+
+    return ids
+
+
 def main():
     event_urls = find_recent_events()
     print("\n", "" * 80, "\n")
@@ -42,14 +73,14 @@ def main():
     pprint(event_urls)
     print("\n", "" * 80, "\n")
 
-    responses = [requests.get(url) for url in event_urls]
-    event_html = [BeautifulSoup(response.text, "lxml") for response in responses]
+    # responses = [requests.get(url) for url in event_urls]
 
+    # event_html = [BeautifulSoup(response.text, "lxml") for response in responses]
     event_ids = [url.split("/")[-1] for url in event_urls]
 
     # for id, html in zip(event_ids, event_html):
-    #     with open(f"html/{id}.html", "w+") as f:
-    #         f.write(str(html.string))
+    #     with open(f"html/{id}.html", "w+", encoding="utf-8") as f:
+    #         f.write(str(html))
 
     # main_video_info = request_main_video(event_ids=event_ids)
 
@@ -73,16 +104,21 @@ def main():
 
     # playback_responses = [requests.get(url) for url in playback_urls]
 
-    recorded_playback_responses = {
-        event_id: requests.get(
-            f"https://videoplayback.parliamentlive.tv/Player/Recorded/{event_id}?audioOnly=False&autoStart=False"
-        )
-        for event_id in event_ids
-    }
+    # recorded_playback_responses = {
+    #     event_id: requests.get(
+    #         f"https://videoplayback.parliamentlive.tv/Player/Recorded/{event_id}?audioOnly=False&autoStart=False"
+    #     )
+    #     for event_id in event_ids
+    # }
 
-    for event_id, response in recorded_playback_responses.items():
-        with open(f"recorded_playback/{event_id}.html", "w+") as f:
-            f.write(str(response.text))
+    # for event_id, response in recorded_playback_responses.items():
+    #     with open(f"recorded_playback/{event_id}.html", "w+") as f:
+    #         f.write(str(response.text))
+
+    session_token = get_session_token()
+    ids = get_asset_material_ids(event_ids=event_ids, session_token=session_token)
+
+    pprint(ids)
 
 
 if __name__ == "__main__":

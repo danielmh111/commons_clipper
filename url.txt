@@ -1,0 +1,15 @@
+https://exposure.api.redbee.live/v2/customer/UKParliament/businessunit/ParliamentLive/entitlement/a9e123e3-800c-44de-9a8d-b548677f714c_0D62A9b/play?
+deviceType=desktop&
+deviceModel=desktop-browser-chrome-142&
+deviceMake=google&
+width=450&
+height=254&
+pageUrl=https%3A%2F%2Fvideoplayback.parliamentlive.tv%2FPlayer%2FIndex%2Fa9e123e3-800c-44de-9a8d-b548677f714c%3FaudioOnly%3DFalse%26autoStart%3DTrue%26script%3DTrue%23https%253A%252F%252Fparliamentlive.tv%252Fevent%252Findex%252Fa9e123e3-800c-44de-9a8d-b548677f714c&
+domain=parliamentlive.tv&
+mute=false&
+autoplay=true&
+ifa=ff178ade-d88d-fca2-c4ac-a648f8339a8a&
+ifaType=sessionid&
+audioOnly=false&
+supportedFormats=dash%2Chls%2Cmss%2Cmp3&
+supportedDrms=widevine
