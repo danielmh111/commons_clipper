@@ -1,4 +1,5 @@
 import json
+from typing import Any
 
 import requests
 from bs4 import BeautifulSoup
@@ -26,12 +27,23 @@ def request_main_video(event_ids: list[str]) -> dict[str, dict]:
     return {event_id: response.json() for event_id, response in video_responses.items()}
 
 
+def extract_playback_url(embedding_code: list[str]) -> list[str | Any]:
+    iframes = [
+        BeautifulSoup(code).find("iframe", id="UKPPlayer") for code in embedding_code
+    ]
+
+    return [iframe.get("src") for iframe in iframes]
+
+
 def main():
     event_urls = find_recent_events()
+    print("\n", "" * 80, "\n")
+    print("URLS:")
     pprint(event_urls)
+    print("\n", "" * 80, "\n")
 
-    # responses = [requests.get(url) for url in event_urls]
-    # event_html = [BeautifulSoup(response.text, "lxml") for response in responses]
+    responses = [requests.get(url) for url in event_urls]
+    event_html = [BeautifulSoup(response.text, "lxml") for response in responses]
 
     event_ids = [url.split("/")[-1] for url in event_urls]
 
@@ -39,15 +51,38 @@ def main():
     #     with open(f"html/{id}.html", "w+") as f:
     #         f.write(str(html.string))
 
-    main_video_info = request_main_video(event_ids=event_ids)
+    # main_video_info = request_main_video(event_ids=event_ids)
 
-    for event_id, info in main_video_info.items():
-        with open(f"json/{event_id}.json", "w+") as f:
-            f.write(json.dumps(info))
+    # for event_id, info in main_video_info.items():
+    #     with open(f"json/{event_id}.json", "w+") as f:
+    #         f.write(json.dumps(info))
 
-    embedded_code = [info.get("embedCode") for info in main_video_info.values()]
+    # embedded_code = [info.get("embedCode", "") for info in main_video_info.values()]
 
-    pprint(embedded_code)
+    # print("\n", "" * 80, "\n")
+    # print("CODE:")
+    # pprint(embedded_code)
+    # print("\n", "" * 80, "\n")
+
+    # playback_urls = extract_playback_url(embedded_code)
+
+    # print("\n", "" * 80, "\n")
+    # print("PLAYBACK URL:")
+    # pprint(playback_urls)
+    # print("\n", "" * 80, "\n")
+
+    # playback_responses = [requests.get(url) for url in playback_urls]
+
+    recorded_playback_responses = {
+        event_id: requests.get(
+            f"https://videoplayback.parliamentlive.tv/Player/Recorded/{event_id}?audioOnly=False&autoStart=False"
+        )
+        for event_id in event_ids
+    }
+
+    for event_id, response in recorded_playback_responses.items():
+        with open(f"recorded_playback/{event_id}.html", "w+") as f:
+            f.write(str(response.text))
 
 
 if __name__ == "__main__":

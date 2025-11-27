@@ -1,0 +1,705 @@
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/2afd26f9-687d-4312-b663-dd98b1512910\';\n        var livePlayerUrl = \'/Player/Live/2afd26f9-687d-4312-b663-dd98b1512910?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/2afd26f9-687d-4312-b663-dd98b1512910?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'2afd26f9-687d-4312-b663-dd98b1512910\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'RECORDING\', \'NEW\', \'LIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+
+
+
+
+
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/3471bd07-3348-4fe5-9883-bc840be7e8c7\';\n        var livePlayerUrl = \'/Player/Live/3471bd07-3348-4fe5-9883-bc840be7e8c7?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/3471bd07-3348-4fe5-9883-bc840be7e8c7?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'3471bd07-3348-4fe5-9883-bc840be7e8c7\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/dac1995a-218d-4012-8692-c3b40ea247dd\';\n        var livePlayerUrl = \'/Player/Live/dac1995a-218d-4012-8692-c3b40ea247dd?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/dac1995a-218d-4012-8692-c3b40ea247dd?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'dac1995a-218d-4012-8692-c3b40ea247dd\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/86511d84-175b-49d7-ba57-c1b11c655efe\';\n        var livePlayerUrl = \'/Player/Live/86511d84-175b-49d7-ba57-c1b11c655efe?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/86511d84-175b-49d7-ba57-c1b11c655efe?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'86511d84-175b-49d7-ba57-c1b11c655efe\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'RECORDING\', \'NEW\', \'LIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/4ae64a9b-8c16-4813-93d7-d57e69522782\';\n        var livePlayerUrl = \'/Player/Live/4ae64a9b-8c16-4813-93d7-d57e69522782?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/4ae64a9b-8c16-4813-93d7-d57e69522782?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'4ae64a9b-8c16-4813-93d7-d57e69522782\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/22d1910a-5e63-48d8-a17b-7f6cbc4fa7a7\';\n        var livePlayerUrl = \'/Player/Live/22d1910a-5e63-48d8-a17b-7f6cbc4fa7a7?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/22d1910a-5e63-48d8-a17b-7f6cbc4fa7a7?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'22d1910a-5e63-48d8-a17b-7f6cbc4fa7a7\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/319e4e0c-7d3a-4e04-9941-4f18b2476657\';\n        var livePlayerUrl = \'/Player/Live/319e4e0c-7d3a-4e04-9941-4f18b2476657?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/319e4e0c-7d3a-4e04-9941-4f18b2476657?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'319e4e0c-7d3a-4e04-9941-4f18b2476657\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/bff367da-6573-486a-9d27-064ff43d3cad\';\n        var livePlayerUrl = \'/Player/Live/bff367da-6573-486a-9d27-064ff43d3cad?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/bff367da-6573-486a-9d27-064ff43d3cad?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'bff367da-6573-486a-9d27-064ff43d3cad\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/fb7f1318-f7aa-43bf-bd91-644d45acc429\';\n        var livePlayerUrl = \'/Player/Live/fb7f1318-f7aa-43bf-bd91-644d45acc429?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/fb7f1318-f7aa-43bf-bd91-644d45acc429?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'fb7f1318-f7aa-43bf-bd91-644d45acc429\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/663be044-4302-4816-b1d3-fa37bcb734b4\';\n        var livePlayerUrl = \'/Player/Live/663be044-4302-4816-b1d3-fa37bcb734b4?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/663be044-4302-4816-b1d3-fa37bcb734b4?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'663be044-4302-4816-b1d3-fa37bcb734b4\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/bd93fcba-e4f0-4175-b6ef-701621a2d6c2\';\n        var livePlayerUrl = \'/Player/Live/bd93fcba-e4f0-4175-b6ef-701621a2d6c2?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/bd93fcba-e4f0-4175-b6ef-701621a2d6c2?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'bd93fcba-e4f0-4175-b6ef-701621a2d6c2\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/a5880e80-4879-4aa6-bf34-db4946b61d32\';\n        var livePlayerUrl = \'/Player/Live/a5880e80-4879-4aa6-bf34-db4946b61d32?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/a5880e80-4879-4aa6-bf34-db4946b61d32?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'a5880e80-4879-4aa6-bf34-db4946b61d32\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/d600ed7a-197e-469a-afdc-dedfd4f94d20\';\n        var livePlayerUrl = \'/Player/Live/d600ed7a-197e-469a-afdc-dedfd4f94d20?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/d600ed7a-197e-469a-afdc-dedfd4f94d20?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'d600ed7a-197e-469a-afdc-dedfd4f94d20\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f\';\n        var livePlayerUrl = \'/Player/Live/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/e05c422e-a4bc-4a43-9f9a-324ca69a2d4f?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'e05c422e-a4bc-4a43-9f9a-324ca69a2d4f\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/7f5227f2-78cc-4879-be01-945636de7080\';\n        var livePlayerUrl = \'/Player/Live/7f5227f2-78cc-4879-be01-945636de7080?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/7f5227f2-78cc-4879-be01-945636de7080?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'7f5227f2-78cc-4879-be01-945636de7080\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/1281bd50-b2ad-440c-8c4d-d596384c3085\';\n        var livePlayerUrl = \'/Player/Live/1281bd50-b2ad-440c-8c4d-d596384c3085?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/1281bd50-b2ad-440c-8c4d-d596384c3085?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'1281bd50-b2ad-440c-8c4d-d596384c3085\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/fb71c9c1-dd02-4330-86bf-0211c2fc1f09\';\n        var livePlayerUrl = \'/Player/Live/fb71c9c1-dd02-4330-86bf-0211c2fc1f09?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/fb71c9c1-dd02-4330-86bf-0211c2fc1f09?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'fb71c9c1-dd02-4330-86bf-0211c2fc1f09\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/de0a4022-a9f2-488a-887d-cfe9a345d818\';\n        var livePlayerUrl = \'/Player/Live/de0a4022-a9f2-488a-887d-cfe9a345d818?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/de0a4022-a9f2-488a-887d-cfe9a345d818?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'de0a4022-a9f2-488a-887d-cfe9a345d818\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/e23c0403-09eb-48c1-b78d-d831277e4954\';\n        var livePlayerUrl = \'/Player/Live/e23c0403-09eb-48c1-b78d-d831277e4954?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/e23c0403-09eb-48c1-b78d-d831277e4954?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'e23c0403-09eb-48c1-b78d-d831277e4954\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/e6d1b6e3-95fe-4718-b02e-c015cd4acd34\';\n        var livePlayerUrl = \'/Player/Live/e6d1b6e3-95fe-4718-b02e-c015cd4acd34?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/e6d1b6e3-95fe-4718-b02e-c015cd4acd34?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'e6d1b6e3-95fe-4718-b02e-c015cd4acd34\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/7e862a9b-d2b8-4a4a-a8a8-fb3454d4619b\';\n        var livePlayerUrl = \'/Player/Live/7e862a9b-d2b8-4a4a-a8a8-fb3454d4619b?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/7e862a9b-d2b8-4a4a-a8a8-fb3454d4619b?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'7e862a9b-d2b8-4a4a-a8a8-fb3454d4619b\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/a87ba6ec-2e58-43e3-8f51-dd608c46898e\';\n        var livePlayerUrl = \'/Player/Live/a87ba6ec-2e58-43e3-8f51-dd608c46898e?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/a87ba6ec-2e58-43e3-8f51-dd608c46898e?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'a87ba6ec-2e58-43e3-8f51-dd608c46898e\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/00c59f5b-acba-47f2-b9e7-c028a41f89fd\';\n        var livePlayerUrl = \'/Player/Live/00c59f5b-acba-47f2-b9e7-c028a41f89fd?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/00c59f5b-acba-47f2-b9e7-c028a41f89fd?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'00c59f5b-acba-47f2-b9e7-c028a41f89fd\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/6439f349-c8a2-43ea-8b0b-7f592d4729c8\';\n        var livePlayerUrl = \'/Player/Live/6439f349-c8a2-43ea-8b0b-7f592d4729c8?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/6439f349-c8a2-43ea-8b0b-7f592d4729c8?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'6439f349-c8a2-43ea-8b0b-7f592d4729c8\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'
+'\n\n
+<!DOCTYPE html>\n<html>\n
+
+<head>\n
+    <meta name="viewport" content="width=device-width" />\n\n <title>UK Parliament Video Player</title>\n\n
+    <link rel="stylesheet" href="/Content/font-awesome/css/font-awesome.min.css">\n
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n
+    <script src="/bundles/globalJs?v=lZdNUneH_Xz-HfOUBV-cA9DFLhpVdZ4BW1zmX1BlVmk1"></script>\r\n\n
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>\n
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.25/moment-timezone-with-data-1970-2030.min.js"></script>
+    \n\n
+    <script type="text/javascript" src="/Content/js/html-helpers.js"></script>\n\n
+    <script src="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/dist/redbee-player.min.js"></script>
+    \n
+    <link rel="stylesheet" href="/Content/css/player.css" />\n
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@redbeemedia/javascript-player@1.6.0/style.min.css" />\n
+    <link rel="stylesheet" href="/Content/css/redbee-v2.css" />\n\n
+</head>\n
+
+<body>\n <div class="player-content player-no-subtitles"></div>\n\n
+    <script>\n        var player; \n        var planningPlayerUrl = \'/Player/Planning/62a9232f-2360-4e52-afe5-32b4e3c24327\';\n        var livePlayerUrl = \'/Player/Live/62a9232f-2360-4e52-afe5-32b4e3c24327?audioOnly=False&autoStart=False\';\n        var recordedPlayerUrl = \'/Player/Recorded/62a9232f-2360-4e52-afe5-32b4e3c24327?audioOnly=False&autoStart=False\';\n        var genericErrorPlayerUrl = \'/Player/GenericError\';\n        var parentUrl = decodeURIComponent(document.location.hash.replace(/^#/, \'\'));\n        console.log("parentUrl: " + parentUrl);\n        var eventId = \'62a9232f-2360-4e52-afe5-32b4e3c24327\';\n\n        function loadPlayerUrl(url, throttleRequest) {\n\n            if (throttleRequest) {\n                var playerStateLiveReloadTime = randomIntFromInterval(5, 60) * 1000;\n                // Why do we do this? This stops many concurrent users all hitting the api at once.\n                setTimeout(function () {\n                    $.get(url, function (data) {\n                        $(\'.player-content\').html(data);\n                    });\n                }, playerStateLiveReloadTime);\n            } else {\n                $.get(url, function (data) {\n                    $(\'.player-content\').html(data);\n                });\n            }\n        }\n\n        function stateChanged(planningState, recordingState, recordedState, playerState, throttleRequest) {\n            if (playerState == \'PRELIVE\') {\n                loadPlayerUrl(planningPlayerUrl, throttleRequest);\n                return;\n            }\n\n            if (playerState == \'LIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(livePlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(livePlayerUrl, throttleRequest);\n\n                return;\n            }\n\n            if (playerState == \'ARCHIVE\') {\n                if (planningState == \'STOP_DVR\') {\n                    loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                    return;\n                }\n\n                if (typeof (isWatchingDvr) != "undefined") {\n                    if (isWatchingDvr()) {\n                        return;\n                    }\n                }\n\n                loadPlayerUrl(recordedPlayerUrl, throttleRequest);\n                return;\n            }\n\n            loadPlayerUrl(genericErrorPlayerUrl, throttleRequest);\n        }\n\n        $(function () {\n            stateChanged(\'CONFIRMED\', \'COMPLETED\', \'AVAILABLE\', \'ARCHIVE\', false);\n        });\n    </script>
+    \n
+    <script src="/signalr/hubs"></script>\n
+    <script type="text/javascript" src="/Content/js/signalr-utils.js"></script>\n
+</body>\n
+
+</html>\n'

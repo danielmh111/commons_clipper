@@ -1,0 +1,125 @@
+
+
+<input data-val="true" data-val-date="The field PublishedStartTime must be a date." id="PublishedStartTime" name="PublishedStartTime" type="hidden" value="2025-11-26T09:17:06Z" />
+
+<div id="video-wrapper"></div>
+
+<script type="text/javascript">
+    var redBeePlayer;
+
+    function onReceiveMessage(event) {
+        if (!event.data) {
+            return;
+        }
+        if (!event.data.target !== null && event.data.target == 'metamask-inpage') {
+            return;
+        }
+
+        var message = JSON.parse(event.data);
+        if (message.data == null) {
+            return;
+        }
+
+
+        let [key, timestamp, delayStart] = message.data.split('_');
+        if (!timestamp) return;
+
+
+        if (key === "seek-to-live_true") {
+            //TODONEW
+        }
+
+
+        if (key != "seek-program-date-time") return;
+
+        var currentProgramDateTime = new Date(timestamp);
+        if (isNaN(currentProgramDateTime.getTime())) {
+            return;
+        }
+
+        var publishedStartTime = new Date($("#PublishedStartTime").val());
+        var seekSeconds = (currentProgramDateTime.getTime() - publishedStartTime.getTime()) / 1000;
+
+        setTimeout(() => {
+            redBeePlayer.seekToUTC(currentProgramDateTime);
+            setTimeout(() => {
+                redBeePlayer.play();
+            }, 10);
+        },
+        !delayStart ? 10 : 0);
+
+    }
+
+    function setupPlayer() {
+        const audioOnly = "False".toLowerCase() === 'true';
+        var poster = '/Content/img/audio-only.jpg'
+
+        if (!audioOnly) {
+            poster = null
+        }
+
+        const playerOptions = {
+            customer: "UKParliament",
+            businessUnit: "ParliamentLive",
+            exposureBaseUrl: "https://exposure.api.redbee.live",
+            wrapperElement: document.querySelector("div#video-wrapper"),
+            disableCast: true,
+            autoplay: true
+        };
+        const skinOptions = {
+            showWallClock: true,
+            showMetadata: false,
+            timeZone: "Europe/London",
+            showSubtitlesToggleButton: true,
+        };
+
+        redBeePlayer = new redBeeMedia.RedBeePlayer({ player: playerOptions, skin: skinOptions });
+        redBeePlayer.addEventListener('player:timeupdate', (event) => {
+            sendUTCTime(event.utcCurrentTime);
+        });
+        redBeePlayer.addEventListener('player:seeked', (event) => {
+            sendUTCTime(redBeePlayer.getState().utcCurrentTime);
+        });
+        redBeePlayer.addEventListener('player:loaded', (event) => {
+            setTimeout(() => redBeePlayer.play(), 500);
+        });
+
+
+        
+
+
+        redBeePlayer.load({
+            source: "de0a4022-a9f2-488a-887d-cfe9a345d818_0D62A9b",
+            audioOnly: audioOnly,
+            poster: poster,
+            
+        });
+    }
+
+    function sendUTCTime(utcTime) {
+        var utcDate = new Date(utcTime);
+        const message = {
+            'function': "timeUpdate",
+            'sender': document.location.href,
+            'data': {
+                'timeUpdateString': "program-date-time_" + utcDate.toISOString()
+            }
+        };
+        $.postMessage(JSON.stringify(message), parentUrl, window.parent);
+    }
+
+
+    $(function () {
+        try {
+            setupPlayer();
+        } catch(e) {
+            console.error(e);
+            if (e.message === "UNKNOWN_ASSET") {
+                var videoWrapper = document.getElementById("video-wrapper");
+                videoWrapper.innerHTML = "<p style='font-family: karlaregular, arial, sans-serif; font-size: 21px; font-weight: normal;'>PLAYER ERROR</p><p style='font-family: karlaregular, arial, sans-serif; font-size: 16.799999237060547px; font-weight: 500;'>The meeting you have requested could not be found please check the link and try again.</p>";
+            }
+        };
+        $.receiveMessage(onReceiveMessage);
+    });
+
+</script>
